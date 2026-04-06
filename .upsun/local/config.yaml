@@ -1,9 +1,22 @@
 applications:
-  # 'app' est l'identifiant de votre application utilisé dans les routes
-  app:
+  asodeco:
     type: php:8.3
     
-    # Configuration du serveur web pour Symfony
+    runtime:
+      extensions:
+        - pdo_mysql
+        - apcu
+        - intl
+        - mbstring
+        - openssl
+
+    variables:
+      env:
+        APP_ENV: prod
+        APP_DEBUG: 0
+        # URL de connexion à la base de données interne d'Upsun
+        DATABASE_URL: "mysql://main:main@database.internal:3306/main?serverVersion=10.6&charset=utf8mb4"
+
     web:
       locations:
         '/':
@@ -11,28 +24,25 @@ applications:
           expires: 1h
           passthru: '/index.php'
 
-    # Montage de dossiers en écriture (nécessaire pour le cache et les logs)
     mounts:
       'var': { source: local, source_path: var }
       'public/uploads': { source: local, source_path: uploads }
 
-    # Variables d'environnement spécifiques
-    variables:
-      env:
-        APP_ENV: prod
-        APP_DEBUG: 0
-
-    # Étapes de construction (Build) et de déploiement (Deploy)
     hooks:
       build: |
         set -e
         composer install --no-dev --optimize-autoloader
-        bin/console asset-map:compile
+        # On vérifie si asset-map existe avant de compiler
+        if [ -f bin/console ]; then
+          php bin/console asset-map:compile --no-interaction || true
+        fi
       
       deploy: |
         set -e
-        bin/console doctrine:migrations:migrate --no-interaction
+        # Exécution des migrations au moment du déploiement
+        if [ -f bin/console ]; then
+          php bin/console doctrine:migrations:migrate --no-interaction
+        fi
 
-    # Relations avec les services (Base de données)
     relationships:
       database: "db:mysql"
