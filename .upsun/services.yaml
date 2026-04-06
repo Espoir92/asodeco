@@ -1,0 +1,4 @@
+# Définition de la base de données MySQL
+db:
+  type: mysql:10.6
+  size: S # Taille de l'instance (S, M, L, etc.)

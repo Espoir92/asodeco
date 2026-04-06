@@ -1,0 +1,38 @@
+applications:
+  # 'app' est l'identifiant de votre application utilisé dans les routes
+  app:
+    type: php:8.3
+    
+    # Configuration du serveur web pour Symfony
+    web:
+      locations:
+        '/':
+          root: 'public'
+          expires: 1h
+          passthru: '/index.php'
+
+    # Montage de dossiers en écriture (nécessaire pour le cache et les logs)
+    mounts:
+      'var': { source: local, source_path: var }
+      'public/uploads': { source: local, source_path: uploads }
+
+    # Variables d'environnement spécifiques
+    variables:
+      env:
+        APP_ENV: prod
+        APP_DEBUG: 0
+
+    # Étapes de construction (Build) et de déploiement (Deploy)
+    hooks:
+      build: |
+        set -e
+        composer install --no-dev --optimize-autoloader
+        bin/console asset-map:compile
+      
+      deploy: |
+        set -e
+        bin/console doctrine:migrations:migrate --no-interaction
+
+    # Relations avec les services (Base de données)
+    relationships:
+      database: "db:mysql"

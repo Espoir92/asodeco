@@ -1,0 +1,9 @@
+# Ce fichier définit comment le trafic entrant est redirigé
+"https://{default}/":
+  type: upstream
+  # Le nom "app" doit correspondre au nom défini dans config.yaml
+  upstream: "app:http"
+
+"http://{default}/":
+  type: redirect
+  to: "https://{default}/"
