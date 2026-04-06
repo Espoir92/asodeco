@@ -13,20 +13,22 @@ build:
     flavor: composer
 
 relationships:
-    database: db:mysql
+    database: "db:mysql"
 
 web:
     locations:
         '/':
-            root: public
-            passthru: /index.php
+            root: "public"
+            passthru: "/index.php"
             index:
                 - index.php
+            allow: true
 
 hooks:
     build: |
+        set -e
         composer install --no-dev --optimize-autoloader
-        php bin/console asset-map:compile
     deploy: |
+        set -e
         php bin/console doctrine:migrations:migrate --no-interaction
         php bin/console cache:clear --env=prod
