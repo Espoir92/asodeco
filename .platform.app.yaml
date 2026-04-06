@@ -1,0 +1,58 @@
+# .platform.app.yaml
+name: 'asodeco'
+type: 'php:8.3'
+
+runtime:
+    extensions:
+        - pdo_mysql
+        - intl
+        - gd
+        - zip
+        - curl
+
+build:
+    flavor: 'composer'
+
+dependencies:
+    php:
+        'composer/composer': '^2'
+
+relationships:
+    database: 'db:mysql'
+
+web:
+    locations:
+        '/':
+            root: 'public'
+            passthru: '/index.php'
+            index:
+                - 'index.php'
+            allow: true
+            rules:
+                '\.(jpeg|jpg|png|gif|svg|ico|css|js|map|woff|woff2|ttf|eot)$':
+                    allow: true
+                '^/index\.php$':
+                    allow: true
+                '^/(css|js|images|uploads)/':
+                    allow: true
+
+mounts:
+    'var/log':
+        source: local
+        source_path: 'logs'
+    'var/cache':
+        source: local
+        source_path: 'cache'
+    'public/uploads':
+        source: local
+        source_path: 'uploads'
+
+hooks:
+    build: |
+        set -e
+        composer install --no-dev --optimize-autoloader
+        php bin/console asset-map:compile
+    deploy: |
+        set -e
+        php bin/console doctrine:migrations:migrate --no-interaction
+        php bin/console cache:clear --env=prod

@@ -1,0 +1,16 @@
+# public/.htaccess
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Ne pas rediriger les fichiers et dossiers existants
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+    
+    # Rediriger toutes les autres requêtes vers l'accueil
+    RewriteRule ^(?!en/)(.*)$ / [L,R=302]
+    RewriteRule ^en/(.*)$ /en [L,R=302]
+</IfModule>
+
+# Rediriger les erreurs 404 vers l'accueil
+#ErrorDocument 404 /index.php

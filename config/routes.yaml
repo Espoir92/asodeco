@@ -20,6 +20,28 @@ controllers:
         _locale: fr
 
 
+# Cette route doit être la dernière (capture tout)
+error_redirect:
+    path: /{any}
+    controller: App\Controller\ErrorController::redirectToHome
+    requirements:
+        any: '.*'
+
+# error_redirect:
+#     path: /{any}
+#     controller: App\Controller\ErrorController::redirectToHome
+#     requirements:
+#         any: '.*'
+    # priority: -10
+
+# Route par défaut pour les pages non trouvées (optionnel)
+# fallback:
+#     path: /{any}
+#     controller: App\Controller\ErrorController::fallback
+#     requirements:
+#         any: '.*'
+
+
 
 # admin:
 #     resource: '@EasyAdminBundle/Controller/EasyAdminController.php'
