@@ -1,0 +1,8 @@
+about:
+    title: "About ASODECO"
+    presentation:
+        denomination: "Name"
+        sigle: "Acronym"
+        siège: "Headquarters"
+        duree: "Duration"
+        # etc.

@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if is_english is defined and is_english %}
+        Our areas of intervention - ASODECO
+    {% else %}
+        Nos domaines d'intervention - ASODECO
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <h1 class="mb-4 text-center">
+        {% if is_english is defined and is_english %}
+            Our areas of intervention
+        {% else %}
+            Nos domaines d'intervention
+        {% endif %}
+    </h1>
+    <p class="lead text-center mb-5">
+        {% if is_english is defined and is_english %}
+            Concrete actions for community development
+        {% else %}
+            Des actions concrètes pour le développement communautaire
+        {% endif %}
+    </p>
+
+    {% if domains is empty %}
+        <div class="alert alert-info text-center">
+            {% if is_english is defined and is_english %}
+                No areas defined yet. Please come back later.
+            {% else %}
+                Aucun domaine défini pour le moment. Revenez plus tard.
+            {% endif %}
+        </div>
+    {% else %}
+        <div class="row g-4">
+            {% for domain in domains %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="card domain-card h-100">
+                        {# Affichage de l'image #}
+                        {% if domain.imageFilename %}
+                            <img src="{{ asset('uploads/domains/' ~ domain.imageFilename) }}" 
+                                 class="card-img-top" 
+                                 alt="{{ domain.name }}">
+                        {% else %}
+                            <img src="{{ asset('images/default-domain.png') }}" 
+                                 class="card-img-top" 
+                                 alt="{{ domain.name }}">
+                        {% endif %}
+                        <div class="card-body text-center">
+                            {# L'icône a été supprimée pour éviter l'erreur #}
+                            {# <i class="bi bi-{{ domain.icon|default('grid') }} domain-icon"></i> #}
+                            <h5 class="card-title">
+                                {% if is_english is defined and is_english and domain.nameEn %}
+                                    {{ domain.nameEn }}
+                                {% else %}
+                                    {{ domain.name }}
+                                {% endif %}
+                            </h5>
+                            <p class="card-text">
+                                {% set description = (is_english is defined and is_english and domain.descriptionEn) ? domain.descriptionEn : domain.description %}
+                                {{ description|striptags|slice(0, 120) }}{% if description|length > 120 %}…{% endif %}
+                            </p>
+                            <a href="{{ path(is_english is defined and is_english ? 'app_domain_show_en' : 'app_domain_show', {slug: domain.slug}) }}" 
+                               class="btn btn-outline-primary btn-sm">
+                                {% if is_english is defined and is_english %}
+                                    Learn more
+                                {% else %}
+                                    En savoir plus
+                                {% endif %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

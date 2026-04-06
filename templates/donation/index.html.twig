@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Faire un don - ASODECO{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <h1 class="mb-4 text-center">Faire un don</h1>
+            
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <p class="lead">Votre soutien financier nous permet de poursuivre nos actions auprès des communautés vulnérables en RDC.</p>
+                    
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle"></i> Les dons sont utilisés à 90% directement pour les projets sur le terrain. Un reçu fiscal vous sera délivré pour tout don.
+                    </div>
+                    
+                    <h3 class="mt-4">Pourquoi donner ?</h3>
+                    <ul>
+                        <li>✅ Soutenir des projets concrets dans la santé, l'éducation et l'environnement</li>
+                        <li>✅ Aider des milliers de familles à accéder à l'eau potable et aux soins</li>
+                        <li>✅ Contribuer à l'autonomisation des femmes et des jeunes</li>
+                        <li>✅ Bénéficier d'un reçu fiscal pour votre don</li>
+                    </ul>
+                    
+                    <h3 class="mt-4">Comment faire un don ?</h3>
+                    
+                    <div class="row mt-3">
+                        <!-- Mobile Money -->
+                        <div class="col-md-6 mb-3">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-phone fs-1 text-primary"></i>
+                                    <h5 class="mt-3">Mobile Money</h5>
+                                    <div class="text-start mt-3">
+                                        <p><strong>📱 M-Pesa :</strong><br>
+                                        Numéro : <span class="fw-bold">+243 812 345 678</span><br>
+                                        Nom : <span class="fw-bold">ASODECO</span></p>
+                                        <hr>
+                                        <p><strong>📱 Airtel Money :</strong><br>
+                                        Numéro : <span class="fw-bold">+243 812 345 679</span><br>
+                                        Nom : <span class="fw-bold">ASODECO</span></p>
+                                        <hr>
+                                        <p><strong>📱 Orange Money :</strong><br>
+                                        Numéro : <span class="fw-bold">+243 812 345 680</span><br>
+                                        Nom : <span class="fw-bold">ASODECO</span></p>
+                                    </div>
+                                    <small class="text-muted">Mentionnez "Don" dans le message.</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Banque -->
+                        <div class="col-md-6 mb-3">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-bank fs-1 text-primary"></i>
+                                    <h5 class="mt-3">Virement bancaire</h5>
+                                    <div class="text-start mt-3">
+                                        <p><strong>🏦 Equity Bank :</strong><br>
+                                        Titulaire : <span class="fw-bold">ASODECO</span><br>
+                                        Compte : <span class="fw-bold">1234 5678 9101</span><br>
+                                        IBAN : <span class="fw-bold">CD 1234 5678 9101 1121 3141</span><br>
+                                        BIC : <span class="fw-bold">EQCDKX</span></p>
+                                        <hr>
+                                        <p><strong>🏦 Rawbank :</strong><br>
+                                        Titulaire : <span class="fw-bold">ASODECO</span><br>
+                                        Compte : <span class="fw-bold">9876 5432 1098</span><br>
+                                        IBAN : <span class="fw-bold">CD 9876 5432 1098 7654 3210</span><br>
+                                        BIC : <span class="fw-bold">RAWBCD</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <a href="mailto:donation@asodeco.cd" class="btn btn-warning btn-lg">
+                            <i class="bi bi-envelope"></i> Nous contacter pour un don
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card bg-light">
+                <div class="card-body text-center">
+                    <h5>Besoin d'aide ?</h5>
+                    <p>Pour toute question sur les dons, contactez notre équipe :</p>
+                    <p><strong>📧 donation@asodeco.cd</strong><br>
+                    <strong>📞 +243 123 456 789</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

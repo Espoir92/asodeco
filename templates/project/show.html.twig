@@ -1,0 +1,227 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if is_english is defined and is_english and project.titleEN %}
+        {{ project.titleEN }} - ASODECO
+    {% else %}
+        {{ project.title }} - ASODECO
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ path(is_english is defined and is_english ? 'app_home_en' : 'app_home') }}">
+                    {{ is_english is defined and is_english ? 'Home' : 'Accueil' }}
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="{{ path(is_english is defined and is_english ? 'app_projects_en' : 'app_projects') }}">
+                    {{ is_english is defined and is_english ? 'Projects' : 'Projets' }}
+                </a>
+            </li>
+            <li class="breadcrumb-item active">
+                {% if is_english is defined and is_english and project.titleEN %}
+                    {{ project.titleEN }}
+                {% else %}
+                    {{ project.title }}
+                {% endif %}
+            </li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <h1 class="mb-3">
+                {% if is_english is defined and is_english and project.titleEN %}
+                    {{ project.titleEN }}
+                {% else %}
+                    {{ project.title }}
+                {% endif %}
+            </h1>
+            <p class="text-muted">
+                {{ is_english is defined and is_english ? 'Status' : 'Statut' }}:
+                {% set status = project.status == 'ongoing' ? (is_english ? 'Ongoing' : 'En cours') : (is_english ? 'Completed' : 'Terminé') %}
+                {{ status }}
+            </p>
+            <div class="content">
+                {% set description = (is_english is defined and is_english and project.descriptionEN) ? project.descriptionEN : project.description %}
+                {{ description|raw }}
+            </div>
+
+            {% if project.objectives is not empty %}
+                <h3 class="mt-4">
+                    {{ is_english is defined and is_english ? 'Objectives' : 'Objectifs' }}
+                </h3>
+                {% set objectives = (is_english is defined and is_english and project.objectivesEN) ? project.objectivesEN : project.objectives %}
+                <div class="content">{{ objectives|raw }}</div>
+            {% endif %}
+
+            {% if project.results is not empty %}
+                <h3 class="mt-4">
+                    {{ is_english is defined and is_english ? 'Results' : 'Résultats' }}
+                </h3>
+                {% set results = (is_english is defined and is_english and project.resultsEN) ? project.resultsEN : project.results %}
+                <div class="content">{{ results|raw }}</div>
+            {% endif %}
+
+            <!-- Appuis (financements / partenaires) -->
+            {% if project.appuis is not empty %}
+                <h3 class="mt-4">
+                    {{ is_english is defined and is_english ? 'Funding & partners' : 'Financements & partenaires' }}
+                </h3>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                              \
+                                <th>{{ is_english ? 'Organization' : 'Organisation' }}</th>
+                                <th>{{ is_english ? 'Type of support' : 'Type d’appui' }}</th>
+                                <th>{{ is_english ? 'Amount' : 'Montant' }}</th>
+                                <th>{{ is_english ? 'Date' : 'Date' }}</th>
+                              </tr>
+                        </thead>
+                        <tbody>
+                            {% for appui in project.appuis %}
+                                <tr>
+                                    <td>
+                                        {% if appui.structure %}
+                                            {{ appui.structure.nom }}
+                                        {% else %}
+                                            <span class="text-muted">{{ is_english ? 'Unknown organization' : 'Organisation inconnue' }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ appui.natureAppui }}</td>
+                                    <td>{{ appui.montant ? appui.montant ~ ' USD' : '-' }}</td>
+                                    <td>{{ appui.dateAppui|date('d/m/Y') }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+
+            <!-- Bénéficiaires affectés -->
+            {% if project.affectations is not empty %}
+                <h3 class="mt-4">
+                    {{ is_english is defined and is_english ? 'Beneficiaries' : 'Bénéficiaires' }}
+                </h3>
+                <ul>
+                    {% for affectation in project.affectations %}
+                        <li>
+                            {% if affectation.beneficiaire %}
+                                {{ affectation.beneficiaire.nom }}
+                            {% else %}
+                                <span class="text-muted">{{ is_english ? 'Unknown beneficiary' : 'Bénéficiaire inconnu' }}</span>
+                            {% endif %}
+                            ({{ affectation.typeAppui }}) – {{ affectation.dateAffectation|date('d/m/Y') }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <!-- Articles liés -->
+            {% if project.articles is not empty %}
+                <h3 class="mt-4">
+                    {{ is_english is defined and is_english ? 'Related news' : 'Actualités liées' }}
+                </h3>
+                <div class="row">
+                    {% for article in project.articles %}
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100 shadow-sm">
+                                {% if article.imageFilename %}
+                                    <img src="{{ asset('uploads/articles/' ~ article.imageFilename) }}" class="card-img-top" alt="{{ article.title }}">
+                                {% else %}
+                                    <img src="{{ asset('images/default article 1.jpg') }}" class="card-img-top" alt="Article image">
+                                {% endif %}
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        {% if is_english and article.titleEn %}
+                                            {{ article.titleEn }}
+                                        {% else %}
+                                            {{ article.title }}
+                                        {% endif %}
+                                    </h5>
+                                    <p class="card-text">
+                                        {% set content = (is_english and article.contentEn) ? article.contentEn : article.content %}
+                                        {{ content|striptags|slice(0, 100) }}{% if content|length > 100 %}…{% endif %}
+                                    </p>
+                                    <a href="{{ path(is_english ? 'app_article_show_en' : 'app_article_show', {slug: article.slug}) }}" class="btn btn-outline-primary btn-sm">
+                                        {{ is_english ? 'Read more' : 'Lire la suite' }}
+                                    </a>
+                                </div>
+                                <div class="card-footer text-muted small">
+                                    {{ is_english ? 'Published on' : 'Publié le' }} {{ article.createdAt|date('d/m/Y') }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <a href="{{ path(is_english is defined and is_english ? 'app_projects_en' : 'app_projects') }}"
+               class="btn btn-outline-primary mt-4">
+                <i class="bi bi-arrow-left"></i>
+                {{ is_english is defined and is_english ? 'Back to projects' : 'Retour aux projets' }}
+            </a>
+        </div>
+
+        <div class="col-lg-4">
+            {% if project.imageFilename %}
+                <img src="{{ asset('uploads/projects/' ~ project.imageFilename) }}" class="img-fluid rounded shadow mb-4" alt="{{ project.title }}">
+            {% else %}
+                <img src="{{ asset('images/default projet 1.png') }}" class="img-fluid rounded shadow mb-4" alt="Project image">
+            {% endif %}
+
+            <div class="card bg-light p-3">
+                <h5>
+                    <i class="bi bi-info-circle"></i>
+                    {{ is_english is defined and is_english ? 'Quick info' : 'Informations rapides' }}
+                </h5>
+                {% if project.startDate %}
+                    <p><strong>{{ is_english ? 'Start date' : 'Début' }} :</strong> {{ project.startDate|date('d/m/Y') }}</p>
+                {% endif %}
+                {% if project.endDate %}
+                    <p><strong>{{ is_english ? 'End date' : 'Fin' }} :</strong> {{ project.endDate|date('d/m/Y') }}</p>
+                {% endif %}
+                {% if project.budget %}
+                    <p><strong>{{ is_english ? 'Budget' : 'Budget' }} :</strong> {{ project.budget }}</p>
+                {% endif %}
+                {% if project.country %}
+                    <p><strong>{{ is_english ? 'Country' : 'Pays' }} :</strong> {{ project.country }}</p>
+                {% endif %}
+                {% if project.province %}
+                    <p><strong>{{ is_english ? 'Province' : 'Province' }} :</strong> {{ project.province }}</p>
+                {% endif %}
+                {% if project.code %}
+                    <p><strong>{{ is_english ? 'Project code' : 'Code projet' }} :</strong> {{ project.code }}</p>
+                {% endif %}
+                {% if project.secteur %}
+                    <p><strong>{{ is_english ? 'Sector' : 'Secteur' }} :</strong>
+                        {% if is_english and project.secteurEN %}
+                            {{ project.secteurEN }}
+                        {% else %}
+                            {{ project.secteur }}
+                        {% endif %}
+                    </p>
+                {% endif %}
+                <hr>
+                <h5>
+                    <i class="bi bi-heart"></i>
+                    {{ is_english is defined and is_english ? 'Support this project' : 'Soutenez ce projet' }}
+                </h5>
+                <p>
+                    {{ is_english is defined and is_english
+                        ? 'Your contribution can make a difference. Contact us to learn more.'
+                        : 'Votre contribution peut faire la différence. Contactez-nous pour en savoir plus.' }}
+                </p>
+                <a href="{{ path(is_english is defined and is_english ? 'app_contact_en' : 'app_contact') }}"
+                   class="btn btn-warning btn-sm">
+                    {{ is_english is defined and is_english ? 'Contact us' : 'Nous contacter' }}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

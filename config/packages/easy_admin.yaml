@@ -1,0 +1,8 @@
+easy_admin:
+    design:
+        menu:
+            - { label: 'Projets', entity: 'Project' }
+            - { label: 'Actualités', entity: 'Article' }
+            - { label: 'Domaines', entity: 'Domain' }
+            - { label: 'Messages', entity: 'Contact' }
+            - { entity: 'User', label: 'Utilisateurs', icon: 'users' }

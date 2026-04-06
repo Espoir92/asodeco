@@ -1,0 +1,8 @@
+about:
+    title: "À propos de l'ONG ASODECO"
+    presentation:
+        denomination: "Dénomination"
+        sigle: "Sigle"
+        siège: "Siège social"
+        duree: "Durée"
+        # etc.

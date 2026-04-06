@@ -1,0 +1,13 @@
+{% if field.value is not empty %}
+    <ul>
+    {% for appui in field.value %}
+        <li>
+            <strong>{{ appui.structure.nom }}</strong> – {{ appui.natureAppui }}
+            {% if appui.montant %} ({{ appui.montant }} USD){% endif %}
+            <br><small>{{ appui.dateAppui|date('d/m/Y') }}</small>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <span class="text-muted">Aucun appui enregistré.</span>
+{% endif %}

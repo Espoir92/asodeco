@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ project.title }} - ASODECO{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <!-- Fil d'Ariane -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('app_projects') }}">Projets</a></li>
+            <li class="breadcrumb-item active">{{ project.title }}</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <!-- Colonne principale : contenu texte -->
+        <div class="col-lg-8">
+            <h1 class="mb-3">{{ project.title }}</h1>
+            <div class="mb-4">
+                <span class="badge {{ project.status == 'ongoing' ? 'bg-success' : 'bg-secondary' }} me-2">
+                    {{ project.status == 'ongoing' ? 'En cours' : 'Terminé' }}
+                </span>
+                {% if project.startDate %}
+                    <span class="text-muted">Début : {{ project.startDate|date('d/m/Y') }}</span>
+                {% endif %}
+                {% if project.endDate %}
+                    <span class="text-muted ms-3">Fin : {{ project.endDate|date('d/m/Y') }}</span>
+                {% endif %}
+            </div>
+
+            <div class="content">
+                {{ project.description|raw }}
+            </div>
+
+            {% if project.objectives %}
+                <h3 class="mt-5">Objectifs</h3>
+                <div class="content">
+                    {{ project.objectives|raw }}
+                </div>
+            {% endif %}
+
+            {% if project.results %}
+                <h3 class="mt-5">Résultats obtenus</h3>
+                <div class="content">
+                    {{ project.results|raw }}
+                </div>
+            {% endif %}
+
+            {% if project.partners %}
+                <h3 class="mt-5">Partenaires</h3>
+                <p>{{ project.partners }}</p>
+            {% endif %}
+
+            <a href="{{ path('app_projects') }}" class="btn btn-outline-primary mt-4">
+                <i class="bi bi-arrow-left"></i> Retour aux projets
+            </a>
+        </div>
+
+        <!-- Colonne latérale : image, etc. -->
+        <div class="col-lg-4">
+            {% if project.imageFilename %}
+                <img src="{{ asset('uploads/projects/' ~ project.imageFilename) }}" 
+                     class="img-fluid rounded shadow mb-4" 
+                     alt="{{ project.title }}">
+            {% else %}
+                <img src="{{ asset('images/default-project.jpg') }}" 
+                     class="img-fluid rounded shadow mb-4" 
+                     alt="Image par défaut">
+            {% endif %}
+
+            <div class="card bg-light p-3 mb-4">
+                <h5><i class="bi bi-info-circle"></i> Informations clés</h5>
+                <ul class="list-unstyled">
+                    <li><strong>Statut :</strong> {{ project.status == 'ongoing' ? 'En cours' : 'Terminé' }}</li>
+                    {% if project.startDate %}
+                        <li><strong>Début :</strong> {{ project.startDate|date('d/m/Y') }}</li>
+                    {% endif %}
+                    {% if project.endDate %}
+                        <li><strong>Fin :</strong> {{ project.endDate|date('d/m/Y') }}</li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <div class="card bg-warning-subtle p-3">
+                <h5><i class="bi bi-heart"></i> Soutenez ce projet</h5>
+                <p>Votre contribution peut faire la différence. Contactez-nous pour en savoir plus.</p>
+                <a href="{{ path('app_contact') }}" class="btn btn-warning">Faire un don</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

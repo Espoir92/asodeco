@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}À propos de l'ONG ASODECO{% endblock %}
+
+{% block body %}
+    <div class="container py-5">
+        <h1 class="mb-4">À propos de l'ONG ASODECO</h1>
+        <div class="row">
+            <div class="col-lg-8">
+                <h2>Notre identité</h2>
+                <p><strong>Dénomination :</strong> Actions Sociales pour le Développement Communautaire (ASODECO asbl)</p>
+                <p><strong>Siège social :</strong> 218, Avenue Kitega – Quartier du 4 janvier – Kinshasa-Lingwala / RDC</p>
+                <p><strong>Durée :</strong> Association créée pour une durée indéterminée.</p>
+                <p><strong>Devise :</strong> <em>« Un homme sain dans un milieu sain »</em></p>
+                <p>ASODECO est une association sans but lucratif, reconnue par les autorités congolaises, qui œuvre depuis sa création pour le développement intégré des communautés locales les plus démunies.</p>
+
+                <h2 class="mt-4">Nos buts et objectifs</h2>
+                <p>L’ASODECO a pour but principal de promouvoir le développement communautaire assisté, l’assainissement des milieux de vie et l’assistance humanitaire globale et pluridimensionnelle. Concrètement, nous nous engageons à :</p>
+                <ul>
+                    <li>Contribuer, avec la collaboration nationale et internationale, au programme de lutte contre la pauvreté ;</li>
+                    <li>Améliorer les conditions de vie des populations congolaises ;</li>
+                    <li>Éveiller la conscience des communautés sur les droits humains (droits de l’homme et de l’enfant) et la démocratie ;</li>
+                    <li>Former et sensibiliser aux techniques de travail communautaire productif ;</li>
+                    <li>Promouvoir l’hygiène, l’assainissement du milieu et la santé communautaire ;</li>
+                    <li>Rechercher les aides nécessaires pour des programmes de développement durable.</li>
+                </ul>
+
+                <h2 class="mt-4">Nos domaines d’intervention</h2>
+                <p>Conformément à nos statuts, nous agissons dans cinq grands secteurs :</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5><i class="bi bi-shield-heart"></i> Protection sociale des groupes vulnérables</h5>
+                        <p>Renforcement des capacités, accès aux services sociaux de base.</p>
+                        <h5><i class="bi bi-tree"></i> Protection environnementale</h5>
+                        <p>Eau et assainissement, protection des ressources naturelles, reboisement, évaluation d’impact environnemental.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h5><i class="bi bi-heart-pulse"></i> Santé et nutrition</h5>
+                        <p>Assistance médicale d’urgence, centres de santé communautaire, réhabilitation nutritionnelle, santé de la reproduction.</p>
+                        <h5><i class="bi bi-flower1"></i> Développement communautaire durable</h5>
+                        <p>Appui aux groupements paysans, agriculture, projets maraîchers, fermage, pisciculture.</p>
+                        <h5><i class="bi bi-bricks"></i> Travaux publics</h5>
+                        <p>Réhabilitation d’infrastructures, lutte anti‑érosive, bétonnage de routes, débouchage de caniveaux et rivières.</p>
+                    </div>
+                </div>
+
+                <h2 class="mt-4">Notre gouvernance</h2>
+                <p>L’ASODECO est administrée par des organes statutaires garantissant une gestion transparente et participative :</p>
+                <ul>
+                    <li><strong>Assemblée Générale</strong> : l’organe suprême qui définit les grandes orientations, élit les dirigeants et approuve les comptes.</li>
+                    <li><strong>Comité Directeur</strong> : l’organe exécutif composé d’un Président, d’un Secrétaire Exécutif et d’une Trésorière Générale, mandaté pour cinq ans renouvelable.</li>
+                    <li><strong>Collège des Conseillers</strong> : organe consultatif qui assiste le Comité Directeur.</li>
+                    <li><strong>Direction Technique</strong> : chargée de l’exécution matérielle des projets.</li>
+                        <li><strong>Représentations ou Sections Locales</strong> : antennes sur le territoire national et à l’étranger.</li>
+                </ul>
+                <p>Notre fonctionnement est régi par un Règlement d’Ordre Intérieur qui précise les modalités de cotisation, les procédures de gestion financière et le contrôle interne.</p>
+
+                <h2 class="mt-4">Nos ressources</h2>
+                <p>Les ressources de l’association proviennent des cotisations des membres, des dons et legs, des subventions, des produits des publications et des activités organisées. Chaque année, notre exercice budgétaire court du 1er janvier au 31 décembre, et nos comptes sont approuvés par l’Assemblée Générale.</p>
+                <p>Nous sommes engagés dans une politique de transparence totale vis‑à‑vis de nos partenaires et bailleurs de fonds.</p>
+ <h2 class="mt-4">Nos valeurs</h2>
+            <ul>
+                <li>Solidarité</li>
+                <li>Transparence</li>
+                <li>Engagement communautaire</li>
+                <li>Durabilité</li>
+                <li>Respect de la diversité</li>
+            </ul>
+                <div class="mt-5 p-4 bg-light rounded">
+                    <h4><i class="bi bi-file-earmark-pdf"></i> Documents officiels</h4>
+                    <p>Vous pouvez télécharger nos statuts complets en cliquant sur le lien ci‑dessous :</p>
+                    <a href="{{ asset('downloads/Statuts-Asodeco.pdf') }}" class="btn btn-primary" target="_blank">
+                        <i class="bi bi-download"></i> Télécharger les statuts (PDF)
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <img src="{{ asset('images/reunion rurale.png') }}" class="img-fluid rounded shadow mb-4" alt="Équipe ASODECO">
+                <div class="card bg-light p-3">
+                <h5><i class="bi bi-info-circle"></i> Document officiel</h5>
+                <p>Les statuts de l’ASBL ont été adoptés le 5 février 2009 et enregistrés auprès de l’Office Notarial de Kinshasa. Ils constituent la base légale de notre action.</p>
+            </div>
+                <div class="card bg-success text-white p-3 mb-4">
+                    <h5><i class="bi bi-megaphone"></i> Devenez partenaire</h5>
+                    <p>Votre soutien, qu’il soit financier ou technique, nous permet d’amplifier notre impact. Rejoignez notre réseau de partenaires et bailleurs engagés pour le développement communautaire en RDC.</p>
+                    <a href="{{ path('app_contact') }}" class="btn btn-warning">Contactez-nous</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

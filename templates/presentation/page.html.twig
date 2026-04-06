@@ -1,0 +1,283 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% if isEnglish %}ASODECO - Presentation{% else %}ASODECO - Présentation{% endif %}{% endblock %}
+
+{% block stylesheets %}
+<style>
+    .presentation-hero {
+        background: linear-gradient(135deg, #0a5b9e 0%, #052c44 100%);
+        color: white;
+        padding: 80px 0;
+        text-align: center;
+    }
+    .presentation-hero h1 {
+        font-size: 3rem;
+        font-weight: 800;
+    }
+    .presentation-section {
+        padding: 60px 0;
+    }
+    .presentation-section:nth-child(even) {
+        background-color: #f8f9fa;
+    }
+    .stat-card {
+        background: white;
+        border-radius: 1rem;
+        padding: 2rem;
+        text-align: center;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        transition: transform 0.3s;
+        height: 100%;
+    }
+    .stat-card:hover {
+        transform: translateY(-5px);
+    }
+    .stat-number {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #0a5b9e;
+    }
+    .domain-card {
+        background: white;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        height: 100%;
+        transition: all 0.3s;
+        border-bottom: 3px solid transparent;
+    }
+    .domain-card:hover {
+        border-bottom-color: #ffc107;
+        transform: translateY(-5px);
+    }
+    .domain-icon {
+        font-size: 2.5rem;
+        color: #0a5b9e;
+        margin-bottom: 1rem;
+    }
+    .testimonial {
+        background: #fef9e6;
+        border-radius: 1rem;
+        padding: 2rem;
+        text-align: center;
+        border-left: 4px solid #ffc107;
+    }
+    .btn-download {
+        background-color: #ffc107;
+        color: #0a5b9e;
+        font-weight: bold;
+        padding: 12px 32px;
+        border-radius: 50px;
+        transition: all 0.3s;
+        border: none;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .btn-download:hover {
+        background-color: #ffcd39;
+        transform: translateY(-2px);
+        color: #0a5b9e;
+    }
+    @media print {
+        .no-print {
+            display: none;
+        }
+        .presentation-section {
+            page-break-inside: avoid;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<!-- Hero Section -->
+<div class="presentation-hero no-print">
+    <div class="container">
+        <h1>{% if isEnglish %}ASODECO Presentation{% else %}Présentation ASODECO{% endif %}</h1>
+        <p class="lead">{% if isEnglish %}Discover our mission, our impact and how to support us{% else %}Découvrez notre mission, notre impact et comment nous soutenir{% endif %}</p>
+        <a href="{{ path('app_presentation_pdf', {lang: isEnglish ? 'en' : 'fr'}) }}" class="btn-download mt-3">
+            <i class="bi bi-download"></i> {% if isEnglish %}Download as PDF{% else %}Télécharger en PDF{% endif %}
+        </a>
+    </div>
+</div>
+
+<!-- Content for both web and PDF -->
+<div class="container py-5">
+    <!-- Key figures -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-number">15+</div>
+                <p>{% if isEnglish %}Years of experience{% else %}Années d'expérience{% endif %}</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-number">20</div>
+                <p>{% if isEnglish %}Projects completed{% else %}Projets réalisés{% endif %}</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-number">10k+</div>
+                <p>{% if isEnglish %}Direct beneficiaries{% else %}Bénéficiaires directs{% endif %}</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-number">8</div>
+                <p>{% if isEnglish %}Provinces covered{% else %}Provinces couvertes{% endif %}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mission & Vision -->
+    <div class="row g-5 mb-5">
+        <div class="col-md-6">
+            <h2 class="section-title">{% if isEnglish %}Our Mission{% else %}Notre Mission{% endif %}</h2>
+            <p class="lead">{% if isEnglish %}To contribute to the integrated development of the most vulnerable local communities.{% else %}Contribuer au développement intégré des communautés locales les plus vulnérables.{% endif %}</p>
+            <p>{% if isEnglish %}Through concrete actions in health, education, environment and rural development, we work alongside communities to improve their living conditions and strengthen their resilience.{% else %}À travers des actions concrètes dans les domaines de la santé, l'éducation, l'environnement et le développement rural, nous travaillons aux côtés des communautés pour améliorer leurs conditions de vie et renforcer leur résilience.{% endif %}</p>
+        </div>
+        <div class="col-md-6">
+            <h2 class="section-title">{% if isEnglish %}Our Vision{% else %}Notre Vision{% endif %}</h2>
+            <p class="lead">{% if isEnglish %}"A healthy person in a healthy environment"{% else %}"Un homme sain dans un milieu sain"{% endif %}</p>
+            <p>{% if isEnglish %}A society where every individual can live with dignity, access basic services and actively participate in the development of their community.{% else %}Une société où chaque individu peut vivre dignement, accéder aux services de base et participer activement au développement de sa communauté.{% endif %}</p>
+        </div>
+    </div>
+
+    <!-- Areas of intervention -->
+    <h2 class="section-title text-center w-100 mb-4">{% if isEnglish %}Our areas of intervention{% else %}Nos domaines d'intervention{% endif %}</h2>
+    <p class="text-center text-muted mb-5">{% if isEnglish %}Concrete actions for community development{% else %}Des actions concrètes pour le développement communautaire{% endif %}</p>
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="domain-card">
+                <i class="bi bi-hospital domain-icon"></i>
+                <h4>{% if isEnglish %}Health{% else %}Santé{% endif %}</h4>
+                <p>{% if isEnglish %}Support to health centers, vaccination campaigns, maternal and child health.{% else %}Appui aux centres de santé, campagnes de vaccination, santé maternelle et infantile.{% endif %}</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="domain-card">
+                <i class="bi bi-book domain-icon"></i>
+                <h4>{% if isEnglish %}Education{% else %}Éducation{% endif %}</h4>
+                <p>{% if isEnglish %}School construction, school supplies, teacher training.{% else %}Construction d'écoles, fournitures scolaires, formation des enseignants.{% endif %}</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="domain-card">
+                <i class="bi bi-droplet domain-icon"></i>
+                <h4>{% if isEnglish %}Water & Sanitation{% else %}Eau & Assainissement{% endif %}</h4>
+                <p>{% if isEnglish %}Well drilling, latrine construction, hygiene promotion.{% else %}Forage de puits, construction de latrines, promotion de l'hygiène.{% endif %}</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="domain-card">
+                <i class="bi bi-tree domain-icon"></i>
+                <h4>{% if isEnglish %}Environment{% else %}Environnement{% endif %}</h4>
+                <p>{% if isEnglish %}Reforestation, natural resource protection, erosion control.{% else %}Reforestation, protection des ressources naturelles, lutte contre l'érosion.{% endif %}</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="domain-card">
+                <i class="bi bi-flower1 domain-icon"></i>
+                <h4>{% if isEnglish %}Agriculture{% else %}Agriculture{% endif %}</h4>
+                <p>{% if isEnglish %}Agroecological training, seed distribution, support to cooperatives.{% else %}Formation agroécologique, distribution de semences, appui aux coopératives.{% endif %}</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="domain-card">
+                <i class="bi bi-people domain-icon"></i>
+                <h4>{% if isEnglish %}Social Inclusion{% else %}Inclusion Sociale{% endif %}</h4>
+                <p>{% if isEnglish %}Women empowerment, children's rights, support to persons with disabilities.{% else %}Autonomisation des femmes, droits des enfants, soutien aux personnes handicapées.{% endif %}</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="domain-card">
+                <i class="bi bi-house-heart domain-icon"></i>
+                <h4>{% if isEnglish %}Rural Development{% else %}Développement Rural{% endif %}</h4>
+                <p>{% if isEnglish %}Rural road rehabilitation, community infrastructure.{% else %}Réhabilitation de pistes rurales, infrastructures communautaires.{% endif %}</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="domain-card">
+                <i class="bi bi-graph-up domain-icon"></i>
+                <h4>{% if isEnglish %}Capacity Building{% else %}Renforcement des capacités{% endif %}</h4>
+                <p>{% if isEnglish %}Training for local organizations, project management, advocacy.{% else %}Formation des organisations locales, gestion de projets, plaidoyer.{% endif %}</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="domain-card">
+                <i class="bi bi-bricks domain-icon"></i>
+                <h4>{% if isEnglish %}Public Works{% else %}Travaux Publics{% endif %}</h4>
+                <p>{% if isEnglish %}Road, bridge and drainage rehabilitation, erosion control.{% else %}Réhabilitation de routes, ponts, caniveaux, lutte anti-érosive.{% endif %}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Impact -->
+    <div class="row g-5 mb-5">
+        <div class="col-md-7">
+            <h2 class="section-title">{% if isEnglish %}Our impact (2020-2025){% else %}Notre impact (2020-2025){% endif %}</h2>
+            <ul class="list-unstyled">
+                <li class="mb-2"><i class="bi bi-check-circle-fill text-warning me-2"></i> <strong>20</strong> {% if isEnglish %}projects implemented in 8 provinces{% else %}projets réalisés dans 8 provinces{% endif %}</li>
+                <li class="mb-2"><i class="bi bi-check-circle-fill text-warning me-2"></i> <strong>10,000+</strong> {% if isEnglish %}direct beneficiaries{% else %}bénéficiaires directs{% endif %}</li>
+                <li class="mb-2"><i class="bi bi-check-circle-fill text-warning me-2"></i> <strong>5</strong> {% if isEnglish %}health centers equipped{% else %}centres de santé équipés{% endif %}</li>
+                <li class="mb-2"><i class="bi bi-check-circle-fill text-warning me-2"></i> <strong>3</strong> {% if isEnglish %}schools built or rehabilitated{% else %}écoles construites ou réhabilitées{% endif %}</li>
+                <li class="mb-2"><i class="bi bi-check-circle-fill text-warning me-2"></i> <strong>10</strong> {% if isEnglish %}wells drilled{% else %}puits forés{% endif %}</li>
+                <li class="mb-2"><i class="bi bi-check-circle-fill text-warning me-2"></i> <strong>50,000</strong> {% if isEnglish %}trees planted{% else %}arbres plantés{% endif %}</li>
+                <li class="mb-2"><i class="bi bi-check-circle-fill text-warning me-2"></i> <strong>500</strong> {% if isEnglish %}women trained in income-generating activities{% else %}femmes formées aux métiers générateurs de revenus{% endif %}</li>
+            </ul>
+        </div>
+        <div class="col-md-5">
+            <div class="testimonial">
+                <i class="bi bi-quote fs-1 text-primary opacity-50"></i>
+                <p>{% if isEnglish %}"ASODECO has transformed our community. Thanks to their support, our health center now has running water and a qualified nurse."{% else %}"ASODECO a transformé notre communauté. Grâce à leur soutien, notre centre de santé a désormais de l'eau courante et une infirmière qualifiée."{% endif %}</p>
+                <p class="fw-bold mt-3">— Marie K., {% if isEnglish %}community leader, Kabare{% else %}chef de communauté, Kabare{% endif %}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Why partner -->
+    <h2 class="section-title text-center w-100 mb-4">{% if isEnglish %}Why partner with ASODECO?{% else %}Pourquoi s'associer à ASODECO ?{% endif %}</h2>
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <i class="bi bi-clock-history fs-1 text-primary"></i>
+                    <h5 class="mt-3">{% if isEnglish %}15 years of experience{% else %}15 ans d'expérience{% endif %}</h5>
+                    <p class="text-muted">{% if isEnglish %}A solid track record in community development{% else %}Un parcours solide dans le développement communautaire{% endif %}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <i class="bi bi-graph-up fs-1 text-primary"></i>
+                    <h5 class="mt-3">{% if isEnglish %}Measurable impact{% else %}Impact mesurable{% endif %}</h5>
+                    <p class="text-muted">{% if isEnglish %}90% of funds directly invested in projects{% else %}90% des fonds directement investis dans les projets{% endif %}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <i class="bi bi-shield-check fs-1 text-primary"></i>
+                    <h5 class="mt-3">{% if isEnglish %}Recognized transparency{% else %}Transparence reconnue{% endif %}</h5>
+                    <p class="text-muted">{% if isEnglish %}Regular audits and public reports{% else %}Audits réguliers et rapports publics{% endif %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to action -->
+    <div class="bg-primary text-white rounded-4 p-5 text-center">
+        <h2 class="text-white mb-3">{% if isEnglish %}Ready to make a difference?{% else %}Prêt à faire la différence ?{% endif %}</h2>
+        <p class="mb-4">{% if isEnglish %}Join our network of partners and help us build a better future for Congolese communities.{% else %}Rejoignez notre réseau de partenaires et aidez-nous à construire un avenir meilleur pour les communautés congolaises.{% endif %}</p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a href="mailto:partenariat@asodeco.cd" class="btn btn-warning">partenariat@asodeco.cd</a>
+            <a href="{{ path(isEnglish ? 'app_contact_en' : 'app_contact') }}" class="btn btn-outline-light">{% if isEnglish %}Contact form{% else %}Formulaire de contact{% endif %}</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

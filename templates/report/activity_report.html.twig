@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Rapport d'activité ASODECO - {{ year }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #0a5b9e;
+            padding-bottom: 20px;
+        }
+        .logo {
+            max-width: 150px;
+            margin-bottom: 10px;
+        }
+        h1 {
+            color: #0a5b9e;
+            margin: 0;
+            font-size: 24px;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .date {
+            color: #666;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        h2 {
+            color: #0a5b9e;
+            border-left: 4px solid #ffc107;
+            padding-left: 15px;
+            margin-top: 30px;
+            font-size: 18px;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .stat-card {
+            background: #f5f5f5;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            width: 22%;
+            margin-bottom: 15px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .stat-number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #0a5b9e;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 12px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #0a5b9e;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 10px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+        .project-item {
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+            background: #f9f9f9;
+            padding: 12px;
+            border-radius: 5px;
+        }
+        .project-title {
+            font-weight: bold;
+            color: #0a5b9e;
+            font-size: 14px;
+        }
+        .project-detail {
+            font-size: 12px;
+            margin-top: 5px;
+            color: #555;
+        }
+        .year-selector {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .year-selector select {
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        .year-selector button {
+            background-color: #0a5b9e;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .year-selector button:hover {
+            background-color: #084a7e;
+        }
+        @media print {
+            .year-selector {
+                display: none;
+            }
+            .stat-card {
+                break-inside: avoid;
+            }
+            .project-item {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="{{ absolute_url(asset('images/favicon.png')) }}" class="logo" alt="ASODECO">
+        <h1>ASODECO - Rapport d'activité {{ year }}</h1>
+        <div class="subtitle">Actions Sociales pour le Développement Communautaire</div>
+        <div class="date">Généré le {{ generatedAt|date('d/m/Y H:i') }}</div>
+    </div>
+
+    <!-- Sélecteur d'année (visible uniquement si la page est affichée en HTML, pas dans le PDF) -->
+    <div class="year-selector">
+        <form method="get" action="{{ path('app_report_activity') }}">
+            <label for="year">Choisir l'année : </label>
+            <select name="year" id="year">
+                {% for y in range(2020, 'now'|date('Y')) %}
+                    <option value="{{ y }}" {{ y == year ? 'selected' : '' }}>
+                        {{ y }}
+                    </option>
+                {% endfor %}
+            </select>
+            <button type="submit">Générer le rapport</button>
+        </form>
+    </div>
+
+    <h2>Synthèse de l'année {{ year }}</h2>
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-number">{{ totalProjects }}</div>
+            <div class="stat-label">Projets</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">{{ completedProjects }}</div>
+            <div class="stat-label">Projets terminés</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">{{ totalAppuis }}</div>
+            <div class="stat-label">Appuis reçus</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">{{ totalFunding|number_format(0, ',', ' ') }} USD</div>
+            <div class="stat-label">Financements totaux</div>
+        </div>
+    </div>
+
+    <h2>Bénéficiaires et partenaires</h2>
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-number">{{ totalBeneficiaires }}</div>
+            <div class="stat-label">Bénéficiaires</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">{{ totalStructures }}</div>
+            <div class="stat-label">Structures partenaires</div>
+        </div>
+    </div>
+
+    <h2>Projets de l'année {{ year }}</h2>
+    {% if projects is empty %}
+        <p>Aucun projet enregistré pour l'année {{ year }}.</p>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Projet</th>
+                    <th>Secteur</th>
+                    <th>Statut</th>
+                    <th>Budget</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for project in projects %}
+                <tr>
+                    <td>{{ project.title }}</td>
+                    <td>{{ project.secteur }}</td>
+                    <td>{{ project.status == 'ongoing' ? 'En cours' : 'Terminé' }}</td>
+                    <td>{{ project.budget }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    <h2>Projets terminés en {{ year }}</h2>
+    {% if completedProjectsList is empty %}
+        <p>Aucun projet terminé pour l'année {{ year }}.</p>
+    {% else %}
+        {% for project in completedProjectsList %}
+        <div class="project-item">
+            <div class="project-title">{{ project.title }}</div>
+            <div class="project-detail">
+                <strong>Objectifs :</strong> {{ project.objectives|striptags|slice(0, 150) }}{% if project.objectives|length > 150 %}...{% endif %}
+            </div>
+            <div class="project-detail">
+                <strong>Résultats :</strong> {{ project.results|striptags|slice(0, 150) }}{% if project.results|length > 150 %}...{% endif %}
+            </div>
+            <div class="project-detail">
+                <strong>Date de fin :</strong> {{ project.endDate ? project.endDate|date('d/m/Y') : 'Non spécifiée' }}
+            </div>
+        </div>
+        {% endfor %}
+    {% endif %}
+
+    <h2>Partenaires actifs en {{ year }}</h2>
+    {% if recentStructures is empty %}
+        <p>Aucune structure partenaire enregistrée pour l'année {{ year }}.</p>
+    {% else %}
+        <ul>
+            {% for structure in recentStructures %}
+            <li><strong>{{ structure.nom }}</strong> ({{ structure.type }})</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <div class="footer">
+        <p>ASODECO - Actions Sociales pour le Développement Communautaire</p>
+        <p>Bukavu, Sud-Kivu, République Démocratique du Congo</p>
+        <p>contact@asodeco.cd | +243 123 456 789</p>
+        <p>Ce rapport est généré automatiquement à partir des données du système.</p>
+        <p>Données du {{ year }}-01-01 au {{ year }}-12-31</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,154 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact - ASODECO{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .contact-hero {
+            background: linear-gradient(rgba(10, 91, 158, 0.85), rgba(10, 91, 158, 0.85)), url('{{ asset('images/contact-bg.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        .contact-hero h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        .contact-hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .contact-card {
+            border: none;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            height: 100%;
+        }
+        .form-control, .form-select {
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+        }
+        .form-control:focus {
+            border-color: #ffc107;
+            box-shadow: 0 0 0 0.2rem rgba(255,193,7,0.25);
+        }
+        .btn-submit {
+            background-color: #ffc107;
+            color: #0a5b9e;
+            font-weight: bold;
+            padding: 0.75rem 2rem;
+            border-radius: 2rem;
+            transition: all 0.3s;
+            border: none;
+        }
+        .btn-submit:hover {
+            background-color: #ffcd39;
+            transform: translateY(-2px);
+        }
+        .contact-info-item {
+            margin-bottom: 1.5rem;
+        }
+        .contact-info-item i {
+            font-size: 1.5rem;
+            color: #ffc107;
+            margin-right: 1rem;
+            width: 2rem;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="contact-hero">
+        <div class="container">
+            <h1>Contactez-nous</h1>
+            <p>Une question, une suggestion, une collaboration ? Nous sommes à votre écoute.</p>
+        </div>
+    </div>
+
+    <div class="container mb-5">
+        {# Messages flash #}
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                    <i class="bi bi-{{ label == 'success' ? 'check-circle' : 'exclamation-triangle' }} me-2"></i>
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="card contact-card p-4">
+                    <h3 class="mb-4">Envoyez-nous un message</h3>
+                    {{ form_start(form) }}
+                        <div class="mb-3">
+                            {{ form_label(form.name, 'Nom complet', {'label_attr': {'class': 'form-label'}}) }}
+                            <div class="input-group">
+                                <span class="input-group-text bg-white border-end-0"><i class="bi bi-person"></i></span>
+                                {{ form_widget(form.name, {'attr': {'class': 'form-control border-start-0', 'placeholder': 'Votre nom'}}) }}
+                            </div>
+                            {{ form_errors(form.name) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(form.email, 'Adresse email', {'label_attr': {'class': 'form-label'}}) }}
+                            <div class="input-group">
+                                <span class="input-group-text bg-white border-end-0"><i class="bi bi-envelope"></i></span>
+                                {{ form_widget(form.email, {'attr': {'class': 'form-control border-start-0', 'placeholder': 'exemple@domaine.com'}}) }}
+                            </div>
+                            {{ form_errors(form.email) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_label(form.phone, 'Téléphone (optionnel)', {'label_attr': {'class': 'form-label'}}) }}
+                            <div class="input-group">
+                                <span class="input-group-text bg-white border-end-0"><i class="bi bi-telephone"></i></span>
+                                {{ form_widget(form.phone, {'attr': {'class': 'form-control border-start-0', 'placeholder': '+243 ...'}}) }}
+                            </div>
+                            {{ form_errors(form.phone) }}
+                        </div>
+                        <div class="mb-4">
+                            {{ form_label(form.message, 'Votre message', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.message, {'attr': {'class': 'form-control', 'rows': 5, 'placeholder': 'Écrivez votre message ici...'}}) }}
+                            {{ form_errors(form.message) }}
+                        </div>
+                        <button type="submit" class="btn btn-submit w-100">
+                            <i class="bi bi-send"></i> Envoyer le message
+                        </button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card contact-card p-4">
+                    <h3 class="mb-4">Nos coordonnées</h3>
+                    <div class="contact-info-item">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <strong>Adresse :</strong><br>
+                        ASODECO, Bukavu, Sud-Kivu<br>
+                        République Démocratique du Congo
+                    </div>
+                    <div class="contact-info-item">
+                        <i class="bi bi-telephone-fill"></i>
+                        <strong>Téléphone :</strong><br>
+                        +243 123 456 789
+                    </div>
+                    <div class="contact-info-item">
+                        <i class="bi bi-envelope-fill"></i>
+                        <strong>Email :</strong><br>
+                        <a href="mailto:contact@asodeco.cd">contact@asodeco.cd</a>
+                    </div>
+                    <div class="contact-info-item">
+                        <i class="bi bi-clock-fill"></i>
+                        <strong>Horaires :</strong><br>
+                        Lundi - Vendredi : 8h00 - 17h00<br>
+                        Samedi : 9h00 - 13h00
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

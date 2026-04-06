@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Become a partner - ASODECO{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <h1 class="mb-4">Become a supporting organization</h1>
+    
+    <div class="row">
+        <div class="col-lg-8">
+            <p class="lead">Join our network of partners and contribute to community development in the DRC.</p>
+            
+            <h2 class="mt-4">Why support ASODECO?</h2>
+            <p>Since its creation, ASODECO has carried out concrete projects in health, education, environment and rural development. With your support, we can:</p>
+            <ul>
+                <li>Build and equip schools and health centers.</li>
+                <li>Implement clean water access programs.</li>
+                <li>Train young people and women in promising trades.</li>
+                <li>Rehabilitate community infrastructure.</li>
+            </ul>
+            
+            <h2 class="mt-4">How to support us?</h2>
+            <div class="row mt-3">
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5><i class="bi bi-currency-dollar"></i> Funding</h5>
+                            <p>Grant, donation, project sponsorship. All amounts are welcome.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5><i class="bi bi-tools"></i> Technical support</h5>
+                            <p>Provision of expertise, equipment, training.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5><i class="bi bi-people"></i> Networking</h5>
+                            <p>Facilitate our contacts with local or international partners.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5><i class="bi bi-briefcase"></i> Skills volunteering</h5>
+                            <p>Put your skills to work for our projects (management, communication, etc.).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="mt-4">Useful documents</h2>
+            <ul>
+                <li>
+                    <a href="{{ asset('downloads/statuts-asodeco.pdf') }}" target="_blank">
+                        <i class="bi bi-file-pdf"></i> Download our statutes
+                    </a>
+                </li>
+                
+                {# Sélecteur de période pour le rapport d'activité #}
+                <li class="mb-2">
+                    <div class="d-flex align-items-center gap-2 flex-wrap">
+                        <span><i class="bi bi-file-pdf"></i> Activity report :</span>
+                        <form method="get" action="{{ path('app_report_activity') }}" target="_blank" class="d-inline">
+                            <select name="period" class="form-select form-select-sm d-inline-block w-auto" required>
+                                <option value="" disabled selected>Select a period</option>
+                                {% for y in range(2020, 'now'|date('Y')) %}
+                                    <option value="{{ y }}-{{ y+1 }}">{{ y }} - {{ y+1 }}</option>
+                                {% endfor %}
+                            </select>
+                            <button type="submit" class="btn btn-sm btn-primary">
+                                <i class="bi bi-download"></i> Generate
+                            </button>
+                        </form>
+                    </div>
+                </li>
+                
+                {# <li>
+                    <a href="{{ path('app_presentation_en') }}" target="_blank">
+                        <i class="bi bi-file-pdf"></i> Presentation document
+                    </a>
+                </li> #}
+            <li>
+    <a href="{{ path('app_presentation_page_en') }}" target="_blank">
+        <i class="bi bi-file-pdf"></i> Presentation document
+    </a>
+</li>
+            </ul>
+        </div>
+        
+        <div class="col-lg-4">
+            <div class="card bg-light p-3">
+                <h5><i class="bi bi-envelope"></i> Contact us</h5>
+                <p>To discuss a partnership, write to us:</p>
+                <a href="mailto:partenariat@asodeco.cd" class="btn btn-warning w-100 mb-2">partenariat@asodeco.cd</a>
+                <p class="mt-3">Or fill out our contact form with the subject "Partnership".</p>
+                <a href="{{ path('app_contact_en') }}" class="btn btn-outline-primary w-100">Contact form</a>
+            </div>
+            
+            <div class="card bg-success text-white p-3 mt-4">
+                <h5><i class="bi bi-heart"></i> Make a donation</h5>
+                <p>Your financial contribution, however modest, helps us act.</p>
+                <a href="#" class="btn btn-warning w-100">Donate</a>
+                <small class="mt-2 d-block">A tax receipt will be issued.</small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

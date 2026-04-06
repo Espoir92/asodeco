@@ -1,0 +1,117 @@
+{# templates/admin/dashboard.html.twig #}
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block page_title %}
+    Tableau de bord ASODECO
+{% endblock %}
+
+{% block main %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Bienvenue dans l'administration</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Gérez les contenus de l'ONG ASODECO depuis ce tableau de bord.</p>
+                        <hr>
+                        <div class="row">
+                            <!-- Projets -->
+                            <div class="col-md-3">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <i class="fas fa-tasks fa-3x text-primary"></i>
+                                        <h5 class="mt-2">Projets</h5>
+                                        <p>Ajoutez, modifiez ou supprimez des projets.</p>
+                                        <a href="{{ ea_url().setController('App\\Controller\\Admin\\ProjectCrudController').setAction('index') }}" class="btn btn-sm btn-primary">Gérer</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Actualités -->
+                            <div class="col-md-3">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <i class="fas fa-newspaper fa-3x text-primary"></i>
+                                        <h5 class="mt-2">Actualités</h5>
+                                        <p>Gérez les articles et actualités.</p>
+                                        <a href="{{ ea_url().setController('App\\Controller\\Admin\\ArticleCrudController').setAction('index') }}" class="btn btn-sm btn-primary">Gérer</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Domaines -->
+                            <div class="col-md-3">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <i class="fas fa-list fa-3x text-primary"></i>
+                                        <h5 class="mt-2">Domaines</h5>
+                                        <p>Gérez les domaines d'intervention.</p>
+                                        <a href="{{ ea_url().setController('App\\Controller\\Admin\\DomainCrudController').setAction('index') }}" class="btn btn-sm btn-primary">Gérer</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Messages -->
+                            <div class="col-md-3">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <i class="fas fa-envelope fa-3x text-primary"></i>
+                                        <h5 class="mt-2">Messages</h5>
+                                        <p>Consultez les messages de contact.</p>
+                                        <a href="{{ ea_url().setController('App\\Controller\\Admin\\ContactCrudController').setAction('index') }}" class="btn btn-sm btn-primary">Gérer</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <!-- Structures d'accompagnement -->
+                            <div class="col-md-3">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <i class="fas fa-building fa-3x text-primary"></i>
+                                        <h5 class="mt-2">Structures</h5>
+                                        <p>Gérez les bailleurs et partenaires.</p>
+                                        <a href="{{ ea_url().setController('App\\Controller\\Admin\\StructureAccompagnementCrudController').setAction('index') }}" class="btn btn-sm btn-primary">Gérer</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Appuis -->
+                            <div class="col-md-3">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <i class="fas fa-hand-holding-usd fa-3x text-primary"></i>
+                                        <h5 class="mt-2">Appuis</h5>
+                                        <p>Gérez les financements et contributions.</p>
+                                        <a href="{{ ea_url().setController('App\\Controller\\Admin\\AppuiCrudController').setAction('index') }}" class="btn btn-sm btn-primary">Gérer</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Bénéficiaires -->
+                            <div class="col-md-3">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <i class="fas fa-users fa-3x text-primary"></i>
+                                        <h5 class="mt-2">Bénéficiaires</h5>
+                                        <p>Gérez les personnes, écoles, communautés, etc.</p>
+                                        <a href="{{ ea_url().setController('App\\Controller\\Admin\\BeneficiaireCrudController').setAction('index') }}" class="btn btn-sm btn-primary">Gérer</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Affectations -->
+                            <div class="col-md-3">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <i class="fas fa-link fa-3x text-primary"></i>
+                                        <h5 class="mt-2">Affectations</h5>
+                                        <p>Liez les bénéficiaires aux projets.</p>
+                                        <a href="{{ ea_url().setController('App\\Controller\\Admin\\AffectationCrudController').setAction('index') }}" class="btn btn-sm btn-primary">Gérer</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

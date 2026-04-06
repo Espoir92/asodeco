@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Donate - ASODECO{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <h1 class="mb-4 text-center">Make a donation</h1>
+            
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <p class="lead">Your financial support allows us to continue our work with vulnerable communities in the DRC.</p>
+                    
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle"></i> 90% of donations go directly to field projects. A tax receipt will be issued for every donation.
+                    </div>
+                    
+                    <h3 class="mt-4">Why donate?</h3>
+                    <ul>
+                        <li>✅ Support concrete projects in health, education and environment</li>
+                        <li>✅ Help thousands of families access clean water and healthcare</li>
+                        <li>✅ Contribute to the empowerment of women and youth</li>
+                        <li>✅ Receive a tax receipt for your donation</li>
+                    </ul>
+                    
+                    <h3 class="mt-4">How to donate?</h3>
+                    
+                    <div class="row mt-3">
+                        <!-- Mobile Money -->
+                        <div class="col-md-6 mb-3">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-phone fs-1 text-primary"></i>
+                                    <h5 class="mt-3">Mobile Money</h5>
+                                    <div class="text-start mt-3">
+                                        <p><strong>📱 M-Pesa :</strong><br>
+                                        Number: <span class="fw-bold">+243 812 345 678</span><br>
+                                        Name: <span class="fw-bold">ASODECO</span></p>
+                                        <hr>
+                                        <p><strong>📱 Airtel Money :</strong><br>
+                                        Number: <span class="fw-bold">+243 812 345 679</span><br>
+                                        Name: <span class="fw-bold">ASODECO</span></p>
+                                        <hr>
+                                        <p><strong>📱 Orange Money :</strong><br>
+                                        Number: <span class="fw-bold">+243 812 345 680</span><br>
+                                        Name: <span class="fw-bold">ASODECO</span></p>
+                                    </div>
+                                    <small class="text-muted">Mention "Donation" in the message.</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Bank -->
+                        <div class="col-md-6 mb-3">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-bank fs-1 text-primary"></i>
+                                    <h5 class="mt-3">Bank transfer</h5>
+                                    <div class="text-start mt-3">
+                                        <p><strong>🏦 Equity Bank :</strong><br>
+                                        Account holder: <span class="fw-bold">ASODECO</span><br>
+                                        Account: <span class="fw-bold">1234 5678 9101</span><br>
+                                        IBAN: <span class="fw-bold">CD 1234 5678 9101 1121 3141</span><br>
+                                        BIC: <span class="fw-bold">EQCDKX</span></p>
+                                        <hr>
+                                        <p><strong>🏦 Rawbank :</strong><br>
+                                        Account holder: <span class="fw-bold">ASODECO</span><br>
+                                        Account: <span class="fw-bold">9876 5432 1098</span><br>
+                                        IBAN: <span class="fw-bold">CD 9876 5432 1098 7654 3210</span><br>
+                                        BIC: <span class="fw-bold">RAWBCD</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <a href="mailto:donation@asodeco.cd" class="btn btn-warning btn-lg">
+                            <i class="bi bi-envelope"></i> Contact us for donations
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card bg-light">
+                <div class="card-body text-center">
+                    <h5>Need help?</h5>
+                    <p>For any questions about donations, contact our team:</p>
+                    <p><strong>📧 donation@asodeco.cd</strong><br>
+                    <strong>📞 +243 123 456 789</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

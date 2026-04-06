@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if is_english is defined and is_english %}
+        News - ASODECO
+    {% else %}
+        Actualités - ASODECO
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <h1 class="mb-4">
+        {% if is_english is defined and is_english %}
+            News
+        {% else %}
+            Actualités
+        {% endif %}
+    </h1>
+    <div class="row g-4">
+        {% for article in articles %}
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100">
+                    {% if article.imageFilename %}
+                        <img src="{{ asset('uploads/articles/' ~ article.imageFilename) }}" class="card-img-top" alt="{{ article.title }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            {% if is_english is defined and is_english and article.titleEn %}
+                                {{ article.titleEn }}
+                            {% else %}
+                                {{ article.title }}
+                            {% endif %}
+                        </h5>
+                        <p class="card-text">
+                            {% set content = (is_english is defined and is_english and article.contentEn) ? article.contentEn : article.content %}
+                            {{ content|striptags|slice(0, 100) }}{% if content|length > 100 %}…{% endif %}
+                        </p>
+                        <a href="{{ path(is_english is defined and is_english ? 'app_article_show_en' : 'app_article_show', {slug: article.slug}) }}" class="btn btn-outline-primary">
+                            {% if is_english is defined and is_english %}
+                                Read more
+                            {% else %}
+                                Lire la suite
+                            {% endif %}
+                        </a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        {% if is_english is defined and is_english %}
+                            Published on
+                        {% else %}
+                            Publié le
+                        {% endif %}
+                        {{ article.createdAt|date('d/m/Y') }}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12 text-center">
+                <p>
+                    {% if is_english is defined and is_english %}
+                        No news available at the moment.
+                    {% else %}
+                        Aucune actualité pour le moment.
+                    {% endif %}
+                </p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

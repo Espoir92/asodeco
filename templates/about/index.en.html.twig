@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}About ASODECO{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <h1 class="mb-4">About ASODECO</h1>
+    <div class="row">
+        <div class="col-lg-8">
+            <h2>Our identity</h2>
+            <p><strong>Name :</strong> Social Actions for Community Development (ASODECO asbl)</p>
+            <p><strong>Headquarters :</strong> 218, Kitega Avenue – January 4th District – Kinshasa-Lingwala / DRC</p>
+            <p><strong>Duration :</strong> Association established for an indefinite period.</p>
+            <p><strong>Motto :</strong> <em>“A healthy person in a healthy environment”</em></p>
+            <p>ASODECO is a non-profit organization recognized by the Congolese authorities, working since its creation for the integrated development of the most vulnerable local communities.</p>
+
+            <h2 class="mt-4">Our goals and objectives</h2>
+            <p>ASODECO’s main purpose is to promote assisted community development, the sanitation of living environments, and comprehensive, multidimensional humanitarian assistance. Concretely, we are committed to:</p>
+            <ul>
+                <li>Contribute, with national and international collaboration, to the fight against poverty;</li>
+                <li>Improve the living conditions of the Congolese population;</li>
+                <li>Raise awareness in communities about human rights (human and children’s rights) and democracy;</li>
+                <li>Train and raise awareness on productive community work techniques;</li>
+                <li>Promote hygiene, environmental sanitation and community health;</li>
+                <li>Seek necessary support for sustainable development programs.</li>
+            </ul>
+
+            <h2 class="mt-4">Our areas of intervention</h2>
+            <p>According to our statutes, we act in five major sectors:</p>
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="bi bi-shield-heart"></i> Social protection of vulnerable groups</h5>
+                    <p>Capacity building, access to basic social services.</p>
+                    <h5><i class="bi bi-tree"></i> Environmental protection</h5>
+                    <p>Water and sanitation, protection of natural resources, reforestation, environmental impact assessment.</p>
+                </div>
+                <div class="col-md-6">
+                    <h5><i class="bi bi-heart-pulse"></i> Health and nutrition</h5>
+                    <p>Emergency medical assistance, community health centers, nutritional rehabilitation, reproductive health.</p>
+                    <h5><i class="bi bi-flower1"></i> Sustainable community development</h5>
+                    <p>Support to farmers’ groups, agriculture, market gardening projects, leasing, fish farming.</p>
+                    <h5><i class="bi bi-bricks"></i> Public works</h5>
+                    <p>Infrastructure rehabilitation, anti-erosion measures, road paving, clearing of gutters and rivers.</p>
+                </div>
+            </div>
+
+            <h2 class="mt-4">Our governance</h2>
+            <p>ASODECO is managed by statutory bodies ensuring transparent and participatory governance:</p>
+            <ul>
+                <li><strong>General Assembly</strong> : the supreme body that defines the main directions, elects the leaders and approves the accounts.</li>
+                <li><strong>Steering Committee</strong> : the executive body composed of a President, an Executive Secretary and a Treasurer General, appointed for a renewable five-year term.</li>
+                <li><strong>College of Advisors</strong> : an advisory body that assists the Steering Committee.</li>
+                <li><strong>Technical Directorate</strong> : responsible for the physical execution of projects.</li>
+                <li><strong>Local Representations or Sections</strong> : branches on the national territory and abroad.</li>
+            </ul>
+            <p>Our operation is governed by an Internal Regulation which specifies the contribution methods, financial management procedures and internal control.</p>
+
+            <h2 class="mt-4">Our resources</h2>
+            <p>The association’s resources come from member contributions, donations and bequests, subsidies, income from publications and organized activities. Each year, our fiscal year runs from January 1 to December 31, and our accounts are approved by the General Assembly.</p>
+            <p>We are committed to a policy of total transparency towards our partners and donors.</p>
+
+            <h2 class="mt-4">Our values</h2>
+            <ul>
+                <li>Solidarity</li>
+                <li>Transparency</li>
+                <li>Community commitment</li>
+                <li>Sustainability</li>
+                <li>Respect for diversity</li>
+            </ul>
+
+            <div class="mt-5 p-4 bg-light rounded">
+                <h4><i class="bi bi-file-earmark-pdf"></i> Official documents</h4>
+                <p>You can download our full statutes by clicking the link below:</p>
+                <a href="{{ asset('downloads/Statuts-Asodeco.pdf') }}" class="btn btn-primary" target="_blank">
+                    <i class="bi bi-download"></i> Download statutes (PDF)
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <img src="{{ asset('images/reunion rurale.png') }}" class="img-fluid rounded shadow mb-4" alt="ASODECO team">
+            <div class="card bg-light p-3">
+                <h5><i class="bi bi-info-circle"></i> Official document</h5>
+                <p>The association's statutes were adopted on February 5, 2009 and registered with the Kinshasa Notary Office. They form the legal basis of our action.</p>
+            </div>
+            <div class="card bg-success text-white p-3 mb-4">
+                <h5><i class="bi bi-megaphone"></i> Become a partner</h5>
+                <p>Your support, whether financial or technical, allows us to amplify our impact. Join our network of partners and donors committed to community development in the DRC.</p>
+                <a href="{{ path('app_contact') }}" class="btn btn-warning">Contact us</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

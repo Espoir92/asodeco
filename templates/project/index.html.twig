@@ -1,0 +1,147 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if is_english is defined and is_english %}
+        Projects - ASODECO
+    {% else %}
+        Projets - ASODECO
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <h1 class="mb-4 text-center">
+        {% if is_english is defined and is_english %}
+            Our projects
+        {% else %}
+            Nos projets
+        {% endif %}
+    </h1>
+
+    {# Barre de recherche #}
+    <div class="row justify-content-center mb-5">
+        <div class="col-md-8">
+            <div class="input-group">
+                <input type="text" id="search-input" class="form-control form-control-lg"
+                       placeholder="{% if is_english %}Search projects...{% else %}Rechercher un projet...{% endif %}"
+                       autocomplete="off">
+                <button class="btn btn-primary" type="button" id="search-button">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+            <div id="search-results" class="list-group mt-2" style="display: none;"></div>
+        </div>
+    </div>
+
+    {# Liste des projets (initial) #}
+    <div id="project-list" class="row g-4">
+        {% for project in projects %}
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    {% if project.imageFilename %}
+                        <img src="{{ asset('uploads/projects/' ~ project.imageFilename) }}" class="card-img-top" alt="{{ project.title }}">
+                    {% else %}
+                        <img src="{{ asset('images/default projet 1.png') }}" class="card-img-top" alt="Project image">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            {% if is_english and project.titleEN %}
+                                {{ project.titleEN }}
+                            {% else %}
+                                {{ project.title }}
+                            {% endif %}
+                        </h5>
+                        <p class="card-text">
+                            {% set description = (is_english and project.descriptionEN) ? project.descriptionEN : project.description %}
+                            {{ description|striptags|slice(0, 100) }}{% if description|length > 100 %}…{% endif %}
+                        </p>
+                        <a href="{{ path(is_english ? 'app_project_show_en' : 'app_project_show', {slug: project.slug}) }}" class="btn btn-outline-primary">
+                            {% if is_english %}Learn more{% else %}En savoir plus{% endif %}
+                        </a>
+                    </div>
+                    <div class="card-footer text-muted small">
+                        <div>
+                            {% if is_english %}Status{% else %}Statut{% endif %}:
+                            {{ project.status == 'ongoing' ? (is_english ? 'Ongoing' : 'En cours') : (is_english ? 'Completed' : 'Terminé') }}
+                        </div>
+
+                        {# Nombre d'articles, d'appuis, de bénéficiaires #}
+                        <div class="mt-1">
+                            <i class="bi bi-newspaper"></i> {{ project.articleCount }} {{ is_english ? 'articles' : 'articles' }}
+                            <i class="bi bi-hand-holding-heart ms-2"></i> {{ project.appuiCount }} {{ is_english ? 'supports' : 'appuis' }}
+                            <i class="bi bi-people ms-2"></i> {{ project.affectationCount }} {{ is_english ? 'beneficiaries' : 'bénéficiaires' }}
+                        </div>
+
+                        {# Liste des structures d'accompagnement #}
+                        {% if project.structureNames is not empty %}
+                            <div class="mt-1">
+                                <i class="bi bi-building"></i>
+                                {{ project.structureNames|join(', ') }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12 text-center">
+                <p>{% if is_english %}No projects found.{% else %}Aucun projet trouvé.{% endif %}</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+    const searchInput = document.getElementById('search-input');
+    const searchResults = document.getElementById('search-results');
+    const projectList = document.getElementById('project-list');
+    const isEnglish = {{ is_english is defined and is_english ? 'true' : 'false' }};
+
+    let debounceTimer;
+
+    searchInput.addEventListener('input', function() {
+        clearTimeout(debounceTimer);
+        const query = this.value.trim();
+
+        if (query.length < 2) {
+            searchResults.style.display = 'none';
+            projectList.style.display = 'flex';
+            return;
+        }
+
+        debounceTimer = setTimeout(() => {
+            fetch(`/projets/search?q=${encodeURIComponent(query)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length === 0) {
+                        searchResults.style.display = 'none';
+                        projectList.style.display = 'flex';
+                        return;
+                    }
+
+                    searchResults.innerHTML = '';
+                    data.forEach(project => {
+                        const title = isEnglish && project.titleEN ? project.titleEN : project.title;
+                        const link = document.createElement('a');
+                        link.href = isEnglish ? `/en/projects/${project.slug}` : `/projets/${project.slug}`;
+                        link.className = 'list-group-item list-group-item-action';
+                        link.textContent = title;
+                        searchResults.appendChild(link);
+                    });
+                    searchResults.style.display = 'block';
+                    projectList.style.display = 'none';
+                })
+                .catch(error => console.error('Error:', error));
+        }, 300);
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+            projectList.style.display = 'flex';
+        }
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,7 @@
+<h2>Nouveau message de contact</h2>
+<p><strong>Nom :</strong> {{ contact.name }}</p>
+<p><strong>Email :</strong> {{ contact.email }}</p>
+{% if contact.phone %}<p><strong>Téléphone :</strong> {{ contact.phone }}</p>{% endif %}
+<p><strong>Message :</strong></p>
+<p>{{ contact.message|nl2br }}</p>
+<p>Reçu le {{ contact.createdAt|date('d/m/Y H:i') }}</p>

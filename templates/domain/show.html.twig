@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if is_english is defined and is_english and domain.nameEn %}
+        {{ domain.nameEn }} - ASODECO
+    {% else %}
+        {{ domain.name }} - ASODECO
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    {# Fil d'Ariane #}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ path(is_english is defined and is_english ? 'app_home_en' : 'app_home') }}">
+                    {{ is_english is defined and is_english ? 'Home' : 'Accueil' }}
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="{{ path(is_english is defined and is_english ? 'app_domains_en' : 'app_domains') }}">
+                    {{ is_english is defined and is_english ? 'Our work' : 'Nos actions' }}
+                </a>
+            </li>
+            <li class="breadcrumb-item active">
+                {% if is_english is defined and is_english and domain.nameEn %}
+                    {{ domain.nameEn }}
+                {% else %}
+                    {{ domain.name }}
+                {% endif %}
+            </li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <h1 class="mb-3">
+                {% if is_english is defined and is_english and domain.nameEn %}
+                    {{ domain.nameEn }}
+                {% else %}
+                    {{ domain.name }}
+                {% endif %}
+            </h1>
+            <div class="content">
+                {% set description = (is_english is defined and is_english and domain.descriptionEn) ? domain.descriptionEn : domain.description %}
+                {{ description|raw }}
+            </div>
+
+            <a href="{{ path(is_english is defined and is_english ? 'app_domains_en' : 'app_domains') }}" 
+               class="btn btn-outline-primary mt-4">
+                <i class="bi bi-arrow-left"></i>
+                {{ is_english is defined and is_english ? 'Back to areas' : 'Retour aux domaines' }}
+            </a>
+        </div>
+
+        <div class="col-lg-4">
+            {% if domain.imageFilename %}
+                <img src="{{ asset('uploads/domains/' ~ domain.imageFilename) }}" 
+                     class="img-fluid rounded shadow mb-4" 
+                     alt="{{ domain.name }}">
+            {% else %}
+                <img src="{{ asset('images/default-domain.png') }}" 
+                     class="img-fluid rounded shadow mb-4" 
+                     alt="{{ domain.name }}">
+            {% endif %}
+
+            <div class="card bg-light p-3">
+                <h5>
+                    <i class="bi bi-info-circle"></i>
+                    {{ is_english is defined and is_english ? 'About this area' : 'À propos de ce domaine' }}
+                </h5>
+                <p>
+                    {% if is_english is defined and is_english %}
+                        ASODECO is committed to concrete actions in this field to improve the living conditions of local communities.
+                    {% else %}
+                        ASODECO s’engage dans des actions concrètes dans ce domaine pour améliorer les conditions de vie des communautés locales.
+                    {% endif %}
+                </p>
+                <hr>
+                <h5>
+                    <i class="bi bi-heart"></i>
+                    {{ is_english is defined and is_english ? 'Support our actions' : 'Soutenez nos actions' }}
+                </h5>
+                <p>
+                    {% if is_english is defined and is_english %}
+                        Your contribution can make a difference. Contact us to learn more.
+                    {% else %}
+                        Votre contribution peut faire la différence. Contactez-nous pour en savoir plus.
+                    {% endif %}
+                </p>
+                <a href="{{ path(is_english is defined and is_english ? 'app_contact_en' : 'app_contact') }}" 
+                   class="btn btn-warning btn-sm">
+                    {{ is_english is defined and is_english ? 'Contact us' : 'Nous contacter' }}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

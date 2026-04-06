@@ -1,0 +1,12 @@
+{% if field.value is not empty %}
+    <ul>
+    {% for affectation in field.value %}
+        <li>
+            <strong>{{ affectation.beneficiaire.nom }}</strong>
+            ({{ affectation.typeAppui }}) – {{ affectation.dateAffectation|date('d/m/Y') }}
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <span class="text-muted">Aucun bénéficiaire affecté.</span>
+{% endif %}
