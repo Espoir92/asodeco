@@ -1,7 +1,9 @@
-"https://{default}/":
-  type: upstream
-  upstream: "asodeco:http"
+# .upsun/routes.yaml
+routes:
+    "https://{default}/":
+        type: upstream
+        upstream: "asodeco:http"
 
-"http://{default}/":
-  type: redirect
-  to: "https://{default}/"
+    "http://{default}/":
+        type: redirect
+        to: "https://{default}/"
