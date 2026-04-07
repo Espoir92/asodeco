@@ -8,7 +8,7 @@ applications:
         - apcu
         - intl
         - mbstring
-        - openssl
+        # - openssl
 
     variables:
       env:
