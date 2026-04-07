@@ -15,7 +15,7 @@ applications:
         APP_ENV: prod
         APP_DEBUG: 0
         # URL de connexion à la base de données interne
-        DATABASE_URL: "mysql://main:main@database.internal:3306/main?serverVersion=10.6&charset=utf8mb4"
+        DATABASE_URL: "mysql://main@database.internal:3306/main?serverVersion=10.6&charset=utf8mb4"
 
     web:
       locations:
