@@ -16,7 +16,7 @@ applications:
         # Indispensable pour sécuriser les jetons CSRF des formulaires (Contact, Login)
         APP_SECRET: "ChangerCeCodeParUnCodeAleatoire123"
         # URL de connexion à la base de données interne
-        DATABASE_URL: "mysql://main@database.internal:3306/main?serverVersion=10.6&charset=utf8mb4"
+        DATABASE_URL: "mysql://main@database.internal:3306/main?serverVersion=10.6&charset=utf8mb4&collation=utf8mb4_unicode_ci"
         # Empêche l'erreur 500 sur Contact en ignorant l'envoi réel pour l'instant
         MAILER_DSN: "null://default"
 
