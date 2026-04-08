@@ -105,7 +105,7 @@ class Domain
         $this->imageFile = $imageFile;
         if ($imageFile) {
             // $this->updatedAt = new \DateTimeImmutable();
-                $this->updatedAt = new \DateTime();
+                $this->updatedAt = new \DateTimeImmutable();
 
         }
         return $this;
